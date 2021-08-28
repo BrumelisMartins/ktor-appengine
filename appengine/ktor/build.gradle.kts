@@ -20,10 +20,33 @@ require (JavaVersion.current() <= JavaVersion.VERSION_11) {
 }
 
 dependencies {
+
+
+
+    implementation("com.google.cloud:google-cloud-logging-logback:0.117.0-alpha")
+
+    implementation ("ch.qos.logback:logback-classic:1.2.3")
+    implementation ("org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.20.0")
+
+
     implementation(platform("io.ktor:ktor-bom:1.5.2"))
     implementation("io.ktor:ktor-server-servlet")
     implementation("io.ktor:ktor-html-builder")
-    implementation("com.google.cloud:google-cloud-logging-logback:0.117.0-alpha")
+    implementation ("io.ktor:ktor-locations:1.5.2")
+    implementation ("io.ktor:ktor-server-sessions:1.5.2")
+    implementation ("io.ktor:ktor-auth:1.5.2")
+    implementation ("io.ktor:ktor-auth-jwt:1.5.2")
+    implementation ("io.ktor:ktor-gson:1.5.2")
+    implementation ("io.ktor:ktor-serialization:1.5.2")
+    implementation ("io.ktor:ktor-server-host-common:1.5.2")
+    implementation("com.google.cloud.sql:postgres-socket-factory:1.0.15")
+
+    compile ("org.jetbrains.exposed:exposed-core:0.33.1")
+    compile ("org.jetbrains.exposed:exposed-dao:0.33.1")
+    compile ("org.jetbrains.exposed:exposed-jdbc:0.33.1")
+    compile ("org.postgresql:postgresql:42.2.18")
+    compile ("com.zaxxer:HikariCP:3.3.1")
+
 
     runtimeOnly("com.google.appengine:appengine:1.9.88")
 }
