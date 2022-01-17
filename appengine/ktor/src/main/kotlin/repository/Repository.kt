@@ -25,7 +25,7 @@ interface Repository {
     )
 
     suspend fun setUserToActive(user: User)
-    suspend fun findActiveUser(email: String): User?
+
     suspend fun setUserToInactive(email: String)
 
     suspend fun addTask(displayName: String, taskType: String, location: String, otherDisplayName: String)

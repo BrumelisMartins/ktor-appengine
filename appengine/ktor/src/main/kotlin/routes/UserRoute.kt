@@ -17,18 +17,10 @@ const val USERS = "$API_VERSION/users"
 const val USER_GET_BY_EMAIL = "$USERS/email"
 const val USER_CREATE = "$USERS/create"
 const val USER_GET_BY_STATUS = "$USERS/status"
+const val USER_UPDATE_STATUS = "$USER_GET_BY_STATUS/update"
 const val USER_DELETE = "$USERS/delete"
 
 
-//suspend fun findUserByEmail(email: String): User?
-//suspend fun findUserByStatus(status: String): User?
-//suspend fun removeUser(email: String)
-//suspend fun updateUserStatus(
-//    email: String, status: String,
-//    type: String,
-//    amountOfGold: Long,
-//    amountOfResources: Long
-//)
 @KtorExperimentalLocationsAPI
 @Location(USER_GET_BY_EMAIL)
 class UserGetMyEmailRoute
@@ -40,6 +32,10 @@ class UserCreateRoute
 @KtorExperimentalLocationsAPI
 @Location(USER_GET_BY_STATUS)
 class UserGetByStatusRoute
+
+@KtorExperimentalLocationsAPI
+@Location(USER_UPDATE_STATUS)
+class UserUpdateStatus
 
 @KtorExperimentalLocationsAPI
 @Location(USER_DELETE)
@@ -153,6 +149,12 @@ fun Route.users(
                 application.log.error("Failed to remove User", e)
                 call.respond(HttpStatusCode.BadRequest, "Failed to remove user")
             }
+        }
+    }
+
+    authenticate {
+        post<UserUpdateStatus> {
+
         }
     }
 

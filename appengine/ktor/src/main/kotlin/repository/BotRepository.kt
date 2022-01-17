@@ -78,11 +78,6 @@ class BotRepository : Repository {
         }
     }
 
-    override suspend fun findActiveUser(email: String): User? = dbQuery {
-        ActiveUsers.select { ActiveUsers.status.eq(email) }
-            .map { rowToUser(it) }.singleOrNull()
-    }
-
     override suspend fun setUserToInactive(email: String) {
         dbQuery { ActiveUsers.deleteWhere { ActiveUsers.email eq email } }
     }
@@ -100,7 +95,7 @@ class BotRepository : Repository {
 
     override suspend fun findTask(displayName: String): Task? = dbQuery {
         Tasks.select { Tasks.displayName.eq(displayName) }
-            .map { rowToTask(it) }.singleOrNull()
+            .map { rowToTask(it) }.lastOrNull()
     }
 
 
@@ -124,11 +119,6 @@ class BotRepository : Repository {
         )
     }
 
-    private fun gribuNaudu(): Int {
-        val viens = 2
-        val velviens = 2
-        return viens + velviens
-    }
 
     private fun rowToTask(row: ResultRow?): Task? {
         if (row == null) {

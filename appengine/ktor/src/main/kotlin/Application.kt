@@ -21,15 +21,15 @@ package com.example.demo
 /* ktlint-disable no-wildcard-imports */
 import com.example.demo.repository.BotRepository
 import com.example.demo.repository.DatabaseFactory
+import com.example.demo.routes.activeUsers
+import com.example.demo.routes.tasks
 import com.example.demo.routes.users
 import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.features.*
 import io.ktor.gson.*
-import io.ktor.html.*
 import io.ktor.locations.*
 import io.ktor.routing.*
-import kotlinx.html.*
 
 const val username = "master_user"
 const val password = "adh125DFkeO0r2Rgr"
@@ -38,6 +38,7 @@ const val API_VERSION = "/v1"
 
 // Entry Point of the application as defined in resources/application.conf.
 // @see https://ktor.io/servers/configuration.html#hocon-file
+@KtorExperimentalLocationsAPI
 fun Application.module() {
     // This adds Date and Server headers to each response, and allows custom additional headers
     install(DefaultHeaders)
@@ -78,5 +79,7 @@ fun Application.module() {
 
     routing {
         users(db)
+        tasks(db)
+        activeUsers(db)
     }
 }
